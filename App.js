@@ -40,7 +40,6 @@ class App extends Component {
 		const details  = { ...alarmNotifData, fire_date };
 		console.log(`alarm set: ${fire_date}`);
 		this.setState({ update: `alarm set: ${fire_date}` });
-		if(Date.now()>late)
 		 ReactNativeAN.scheduleAlarm(details);
 	};
 
