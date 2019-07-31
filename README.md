@@ -45,7 +45,6 @@ In your `AndroidManifest.xml`
         <receiver android:name="com.emekalites.react.alarm.notification.ANDismissReceiver" android:exported="false"/>
      .....
 ```
-
 In `android/settings.gradle`
 
 ```gradle
