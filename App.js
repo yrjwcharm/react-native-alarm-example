@@ -3,29 +3,15 @@ import { View, Text, Button, TextInput, DeviceEventEmitter } from 'react-native'
 import ReactNativeAN from 'react-native-alarm-notification';
 const fireDate = ReactNativeAN.parseDate(new Date(Date.now() + 1000));
 const alarmNotifData = {
-	id: "12345",                                  // Required
-	title: "审批管家任务提醒",               // Required
-	message: "你有一条需要处理的任务",           // Required
-	channel: "my_channel_id",                     // Required. Same id as specified in MainApplication's onCreate method
-	ticker: "My Notification Ticker",
-	auto_cancel: false,                            // default: true
+	id: "22",
+	title: "闹钟提醒",
+	message: "你有一条需要处理的任务",
 	vibrate: true,
-	vibration: 100,                               // default: 100, no vibration if vibrate: false
-	small_icon: "ic_launcher",                    // Required
-	large_icon: "ic_launcher",
 	play_sound: true,
-	sound_name: null,                             // Plays custom notification ringtone if sound_name: null
-	color: "red",
-	schedule_once: false,                          // Works with ReactNativeAN.scheduleAlarm so alarm fires once
-	tag: 'some_tag',
-	fire_date: fireDate,                          // Date for firing alarm, Required for ReactNativeAN.scheduleAlarm.
-
-	// You can add any additional data that is important for the notification
-	// It will be added to the PendingIntent along with the rest of the bundle.
-	// e.g.
-	data: { foo: "bar" },
+	schedule_once: false,
+	channel: "wakeup",
+	data: { content: "my notification id is 22" },
 };
-
 
 class App extends Component {
 	constructor(props, context) {
@@ -50,9 +36,11 @@ class App extends Component {
 	setFutureAlarm = () => {
 		const { futureFireDate } = this.state;
 		const fire_date = ReactNativeAN.parseDate(new Date(Date.now() + parseInt(futureFireDate)));
+		let late=Date.now() + parseInt(futureFireDate);
 		const details  = { ...alarmNotifData, fire_date };
 		console.log(`alarm set: ${fire_date}`);
 		this.setState({ update: `alarm set: ${fire_date}` });
+		if(Date.now()>late)
 		 ReactNativeAN.scheduleAlarm(details);
 	};
 
